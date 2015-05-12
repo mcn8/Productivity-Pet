@@ -1,0 +1,22 @@
+<!doctype html>
+<html  data-ng-app="app" data-ng-csp="">
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/optionsStylesheet.css">
+</head>
+<body>
+  <div data-ng-controller="BlockerController">
+    <h1 class="panel">Blocked Sites</h1>
+    <form data-ng-submit="blockSite()">
+      <input type="text" ng-model="siteURL"  size="24"
+             placeholder="Site to block">
+      <input class="btn-primary" type="submit" value="block">
+    </form>
+    <h4 class="sites" data-ng-repeat="site in siteList track by $index">
+      {{site}} <button type="button" data-ng-click="removeBlockedSite(site)"><span class="glyphicon glyphicon-minus-sign minus" aria-hidden="true"></span></button>
+    </h4>
+  </div>
+  <script src="../lib/angular.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

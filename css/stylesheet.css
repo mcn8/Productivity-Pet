@@ -1,0 +1,18 @@
+.container{
+  min-width:800px;
+  min-height:300px;
+  text-align:center;
+}
+
+.todo{
+  text-align:left;
+  margin-left:10px;
+}
+
+.clearButton{
+  margin-top:10px;
+}
+
+.product{
+  text-align:left;
+}

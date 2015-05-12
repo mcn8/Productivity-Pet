@@ -1,0 +1,17 @@
+<!doctype html>
+<html data-ng-app="app" data-ng-csp="">
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/blockedStylesheet.css">
+</head>
+<body data-ng-controller="BlockerController">
+  <img src="../img/no.gif">
+  <h1>Nah... sorry you blocked this site</h1>
+  <button class="btn-primary" data-ng-click="continueToSite()">Let me in for this session [-10 Discipline]</button>
+
+  <script src="../lib/angular.min.js"></script>
+  <script src="app.js"></script>
+  <div data-ng-controller="StatsController">
+  </div>
+</body>
+</html>

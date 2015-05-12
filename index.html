@@ -1,0 +1,114 @@
+<!doctype html>
+<html data-ng-app="app" data-ng-csp="">
+  <head>
+    <title>Productivity Pet Popup</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/angular-csp.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+
+  </head>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-4">
+        <div data-ng-controller="ShopController">
+          <h1 class="panel">Shop</h1>
+          <h5 class="product" data-ng-repeat="food in foods track by $index">
+            <button class="btn-primary" data-ng-click="buyFood(food)"><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span></button>
+            {{food.name + " hunger: +" + food.hungerRestored + " coins: -" + food.coinsLost}}
+          </h5>
+        </div>
+        <div data-ng-controller="TimerController">
+          <h1 class="panel">Work Timer</h1>
+          <div data-ng-hide="timerRunning">
+            <div>
+              <h5>Work Time: </h5>
+              <input type="text" ng-model="workTimer" value="20">
+            </div>
+            <div>
+              <h5>Break Time: </h5>
+              <input type="text" ng-model="breakTimer" value="5">
+            </div>
+            <div>
+              <button style="margin-top: 10px"class="btn-success" data-ng-click="startTimer()">start</button>
+            </div>
+          </div>
+          <div data-ng-show="timerRunning">
+            <h5 data-ng-show="isBreakTime" style="color:green">Break Time!</h5>
+            <h5 data-ng-hide="isBreakTime" style="color:work">Work Time!</h5>
+            <button class="btn-danger" data-ng-click="stopTimer()">stop</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div data-ng-controller="StatsController">
+          <h1 class="panel">Pet</h1>
+          <div data-ng-hide="newPet || petRanAway">
+            <h5>{{petName}}</h5>
+            <div id="game-area" data-ng-controller="MinigameController">
+            </div>
+            <div class="progressbars">
+              <h4>Discipline</h4>
+              <div class="progress">
+                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{stats.discipline}}"
+                aria-valuemin="0" aria-valuemax="100" style="width:{{stats.discipline}}%">
+                {{stats.discipline.toFixed(0)}}
+                </div>
+              </div>
+
+              <h4>Happiness</h4>
+              <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{stats.happiness}}"
+                aria-valuemin="0" aria-valuemax="100" style="width:{{stats.happiness}}%">
+                {{stats.happiness}}
+                </div>
+              </div>
+
+              <h4>Hunger</h4>
+              <div class="progress">
+                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{stats.hunger}}"
+                aria-valuemin="0" aria-valuemax="100" style="width:{{stats.hunger}}%">
+                {{stats.hunger}}
+                </div>
+              </div>
+            </div>
+            <h4>Coins</h4>
+            <h6>{{stats.coins}}</h6>
+            <!--Uncomment to debug running away functionality <button class="btn-primary" data-ng-click="kill()">Kill</button>-->
+
+          </div>
+
+          <div data-ng-show="newPet">
+            <form data-ng-submit="createPet()">
+              <input type="text" ng-model="petName" size="24" placeholder="New Pet Name">
+              <input class="btn-primary" type="submit" value="create">
+            </form>
+          </div>
+
+          <div data-ng-show="petRanAway && !newPet">
+            <h5>Your pet ran away because of your lack of discipline</h5>
+            <button class="btn-default" data-ng-click="rebirth()">Create New</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-4">
+        <div data-ng-controller="TodoController">
+          <h1 class="panel">Todo List</h1>
+          <form data-ng-submit="addTodo()">
+            <input type="text" ng-model="todoText"  size="24"
+                   placeholder="Add todo here">
+            <input class="btn-primary" type="submit" value="add">
+          </form>
+          <a class="clearButton" ng-click="clearCompletedTodos()">clear completed</a>
+          <h4 class="todo" data-ng-repeat="todo in todos track by $index">
+            <input data-ng-model="todo.done" type="checkbox" data-ng-change="updateTodos()"/> {{todo.text}}
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script src="lib/angular.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="lib/phaser.min.js"></script>
+  </body>
+</html>
